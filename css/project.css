@@ -1,11 +1,18 @@
 div.tooltip {
     position:absolute;
+    background-color:#BABFCC;
     z-index:999;
     left:-9999px;
-    background-color:#dedede;
     padding:5px;
-    border:1px solid #fff;
     width:250px;
+    border-style:solid;
+    border-color:#A6ABB8;
+}
+
+div.tooltip { 
+    -moz-border-radius: 5px;
+    border-radius:5px;
+    -webkit-border-radius:5px;
 }
 
 p.tooltip {

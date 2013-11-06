@@ -46,7 +46,11 @@
 				  my_tool.css({opacity:0.8, display:"none"}).fadeIn(400);
         });
         $(this).mousemove(function(kmouse){
-				  my_tool.css({left:kmouse.pageX+15, top:kmouse.pageY+15});
+          var obj = $( "#" + kmouse.currentTarget.id );
+          var offset = obj.offset();
+          var x = offset.left + obj.width(); 
+          var y = offset.top + obj.height(); 
+				  my_tool.css({left:x, top:y});
         }); 
         $(this).mouseout(function(){
 				  my_tool.fadeOut(400);
