@@ -9,10 +9,57 @@
   <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
 
-  <link href="/css/project.css" rel="stylesheet"/>
+  <link href="css/project.css" rel="stylesheet"/>
 </head>
 
-<body class="preview">
-  <a href="#">Link to display tooltip</a>
+<body>
+  <a href="#" title="Tooltip standard">tooltip 0</a>
+  <a id="tooltip_0" class="tooltip" href="#" title="Tooltip jQuery">tooltip 1</a>
+
+
+  <script src="js/jquery-1.9.0.js"></script>
+  <script>
+    function tooltip_create_div(name) {
+      div   =   "<div class='tooltip' id='tooltip_" + name + "'>" ;
+      div  +=   " <p>"; 
+      div  +=   $(this).attr('title');
+      div  +=   " </p>"; 
+      div  +=   "</div>";
+      
+      return div;
+    }
+
+    /****
+    * target: jQuery object
+    * name:   name of tooltip
+    *
+    */
+    function simple_tooltip(targets, name) {
+      targets.each( function(i, anchor ) {
+        var div = tooltip_create_div.call( anchor, name + '_' + i.toString() );
+        $("body").append( div );
+
+        var my_tool = $("#tooltip_" + name + "_" + i);
+        $(this).removeAttr("title");
+
+        $(this).mouseover(function(){
+				  my_tool.css({opacity:0.8, display:"none"}).fadeIn(400);
+        });
+        $(this).mousemove(function(kmouse){
+				  my_tool.css({left:kmouse.pageX+15, top:kmouse.pageY+15});
+        }); 
+        $(this).mouseout(function(){
+				  my_tool.fadeOut(400);
+		    });
+
+      });
+    };
+
+    $(document).ready( function() {
+      allToolTips = $('.tooltip');
+      simple_tooltip( allToolTips, 'test' );
+      
+    });
+  </script>
 </body>
 </html>
